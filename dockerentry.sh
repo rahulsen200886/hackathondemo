@@ -3,10 +3,9 @@ export GOOGLE_APPLICATION_CREDENTIALS=/accounts/key.json
 var_smbuser="mysmbuser"
 var_smbpassword="changemelater"
 var_smbgroup="smbgroup"
-useradd $var_smbuser
+useradd -m $var_smbuser -p $var_smbpassword
 groupadd $var_smbgroup
 usermod -a -G $var_smbgroup $var_smbuser
-(echo "$var_smbpassword" ;echo "$var_smbpassword" )|smbpassword -s -a $var_smbuser
 mkdir -p /export
 chmod 755 /export
 chown $var_smbuser:$var_smbgroup /export
