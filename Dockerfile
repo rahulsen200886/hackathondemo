@@ -16,7 +16,6 @@ RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == \
     VOLUME [ "/sys/fs/cgroup" ]
     CMD ["/usr/sbin/init"]
 ADD gcsfuse.repo /etc/yum.repos.d/gcsfuse.repo
-RUN chmod 775 /dockerentry.sh
 RUN yum -y install gcsfuse samba-common-tools realmd oddjob oddjob-mkhomedir sssd adcli krb5-workstation nscd
 RUN mkdir -p /export
 RUN mkdir -p /opt/smbcust
