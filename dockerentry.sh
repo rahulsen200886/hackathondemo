@@ -1,4 +1,3 @@
-!#/bin/bash
 echo "Running startup"
 export GOOGLE_APPLICATION_CREDENTIALS=/accounts/key.json
 var_smbuser="mysmbuser"
