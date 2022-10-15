@@ -13,7 +13,7 @@ echo "Now I am creating your custom cluster and setting up the ecosystem .. .. "
 
 gcloud container clusters create example-cluster --zone us-central1-a
 gsutil mb gs://${DEVSHELL_PROJECT_ID}-nas-bucket
-sed -i 's/NAS-BUK/${DEVSHELL_PROJECT_ID}-nas-bucket/g' gkeyml/nas.yaml
+sed -i "s/NAS-BUK/${DEVSHELL_PROJECT_ID}-nas-bucket/g" gkeyml/nas.yaml
 gcloud iam service-accounts create smbnfsshare-sa --display-name="My Custom Service Account"
 gsutil iam ch serviceAccount:smbnfsshare-sa@${DEVSHELL_PROJECT_ID}.iam.gserviceaccount.com:objectAdmin gs://${DEVSHELL_PROJECT_ID}-nas-bucket
 gcloud iam service-accounts keys create ./key.json --iam-account=smbnfsshare-sa@${DEVSHELL_PROJECT_ID}.iam.gserviceaccount.com
@@ -22,5 +22,5 @@ rm -f ./key.json
 docker build . -t smbshare1
 docker tag smbshare1 gcr.io/${DEVSHELL_PROJECT_ID}/smshare.v0.1
 docker push gcr.io/${DEVSHELL_PROJECT_ID}/smshare.v0.1
-sed -i 's/PROJECT_NAME/${DEVSHELL_PROJECT_ID}/g' gkeyml/nas.yaml
+sed -i "s/PROJECT_NAME/${DEVSHELL_PROJECT_ID}/g" gkeyml/nas.yaml
 kubectl apply -f gkeyml/nas.yaml
