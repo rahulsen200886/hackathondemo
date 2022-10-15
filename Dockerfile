@@ -16,11 +16,14 @@ RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == \
     VOLUME [ "/sys/fs/cgroup" ]
     CMD ["/usr/sbin/init"]
 ADD gcsfuse.repo /etc/yum.repos.d/gcsfuse.repo
-ADD dockerentry.sh /dockerentry.sh
 RUN chmod 775 /dockerentry.sh
 RUN yum -y install gcsfuse samba-common-tools realmd oddjob oddjob-mkhomedir sssd adcli krb5-workstation nscd
 RUN mkdir -p /export
+RUN mkdir -p /opt/smbcust
+COPY dockerentry.sh /opt/smbcust/
+RUN chmod +rx /opt/smbcust/dockerentry.sh
+
 VOLUME ["/export"]
 EXPOSE 139
 EXPOSE 445
-ENTRYPOINT ["/dockerentry.sh"]
+ENTRYPOINT ["/opt/smbcust/dockerentry.sh"]
