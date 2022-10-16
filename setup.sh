@@ -10,7 +10,11 @@ Press 2 EU
 "
 read region
 echo "Now I am creating your custom cluster and setting up the ecosystem .. .. "
-
+sed -i "s/replaceme/${DEVSHELL_PROJECT_ID}-nas-bucket/g" Dockerfile
+sed -i "s/changeme/${DEVSHELL_PROJECT_ID}/g" createcuster.tf
+docker build . -t smbshare1
+docker tag smbshare1 gcr.io/${DEVSHELL_PROJECT_ID}/smshare.v0.1
+docker push gcr.io/${DEVSHELL_PROJECT_ID}/smshare.v0.1
 terraform init
 terraform apply -auto-approve
 gcloud container clusters get-credentials my-gke-cluster --region us-central1 --project ${DEVSHELL_PROJECT_ID}
@@ -23,10 +27,5 @@ gsutil iam ch serviceAccount:service-account-id@${DEVSHELL_PROJECT_ID}.iam.gserv
 gcloud iam service-accounts keys create ./key.json --iam-account=smbnfsshare-sa@${DEVSHELL_PROJECT_ID}.iam.gserviceaccount.com
 kubectl create secret generic sa-account  --from-file=./key.json
 rm -f ./key.json
-sed -i "s/replaceme/${DEVSHELL_PROJECT_ID}-nas-bucket/g" Dockerfile
-sed -i "s/changeme/${DEVSHELL_PROJECT_ID}/g" createcuster.tf
-docker build . -t smbshare1
-docker tag smbshare1 gcr.io/${DEVSHELL_PROJECT_ID}/smshare.v0.1
-docker push gcr.io/${DEVSHELL_PROJECT_ID}/smshare.v0.1
 sed -i "s/PROJECT_NAME/${DEVSHELL_PROJECT_ID}/g" gkeyml/nas.yaml
 kubectl apply -f gkeyml/nas.yaml
