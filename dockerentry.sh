@@ -1,3 +1,4 @@
+#!/bin/sh
 echo "Running startup"
 yum -y update 
 yum -y install gcsfuse samba-common-tools realmd oddjob oddjob-mkhomedir sssd adcli krb5-workstation nscd
