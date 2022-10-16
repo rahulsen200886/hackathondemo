@@ -11,7 +11,7 @@ RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == \
     rm -f /lib/systemd/system/sockets.target.wants/*initctl*; \
     rm -f /lib/systemd/system/basic.target.wants/*;\
     rm -f /lib/systemd/system/anaconda.target.wants/*; 
-CMD ["/usr/sbin/init"]
+
 ADD gcsfuse.repo /etc/yum.repos.d/gcsfuse.repo
 RUN mkdir -p /export
 RUN mkdir -p /opt/smbcust
@@ -30,3 +30,4 @@ CMD  ["gcsfuse -o rw,allow_other replaceme /export"]
 EXPOSE 139
 EXPOSE 445
 CMD  ["bash","/opt/smbcust/dockerentry.sh"]
+CMD ["/usr/sbin/init"]
