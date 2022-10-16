@@ -1,4 +1,5 @@
 echo "Running startup"
+yum -y update ; yum clean all
 yum -y install gcsfuse samba-common-tools realmd oddjob oddjob-mkhomedir sssd adcli krb5-workstation nscd
 export GOOGLE_APPLICATION_CREDENTIALS=/accounts/key.json
 echo "Running fuse"
