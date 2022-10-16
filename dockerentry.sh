@@ -13,4 +13,4 @@ echo -e "
  force group = smbgroup
 " >> /etc/samba/smb.conf
 #gcsfuse -o rw,allow_other ${BUCKET} /export
-smbd -F
+#smbd -F
