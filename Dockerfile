@@ -22,6 +22,8 @@ RUN mkdir -p /export
 RUN chmod 755 /export
 COPY dockerentry.sh /opt/smbcust/
 RUN chmod +rx /opt/smbcust/dockerentry.sh
+RUN yum -y update 
+RUN yum -y install gcsfuse samba samba-common-tools realmd oddjob oddjob-mkhomedir sssd adcli krb5-workstation nscd
 
 VOLUME ["/export"]
 EXPOSE 139
