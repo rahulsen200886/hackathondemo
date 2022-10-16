@@ -6,7 +6,7 @@ resource "google_service_account" "default" {
 resource "google_project_iam_member" "allow_image_pull" {
   project = "changeme"
   role   = "roles/artifactregistry.reader"
-  member = "serviceAccount:${var.service_account_email}"
+  member = "serviceAccount:${google_service_account.default.email}"
 }
 
 resource "google_container_cluster" "primary" {
