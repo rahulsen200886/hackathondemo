@@ -11,7 +11,7 @@ Press 2 EU
 read region
 echo "Now I am creating your custom cluster and setting up the ecosystem .. .. "
 
-gcloud container clusters create example-cluster --zone us-central1-a
+gcloud container --project "${DEVSHELL_PROJECT_ID}" clusters create-auto "example" --region "us-central1" --release-channel "regular" --network "projects/${DEVSHELL_PROJECT_ID}/global/networks/default" --subnetwork "projects/${DEVSHELL_PROJECT_ID}/regions/us-central1/subnetworks/default" --cluster-ipv4-cidr "/17" --services-ipv4-cidr "/22"
 gsutil mb gs://${DEVSHELL_PROJECT_ID}-nas-bucket
 sed -i "s/NAS-BUK/${DEVSHELL_PROJECT_ID}-nas-bucket/g" gkeyml/nas.yaml
 gcloud iam service-accounts create smbnfsshare-sa --display-name="My Custom Service Account"
