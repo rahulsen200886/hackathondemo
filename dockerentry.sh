@@ -15,6 +15,4 @@ echo -e "
  force user = mysmbuser
  force group = smbgroup
 " >> /etc/samba/smb.conf
-
-
-smdb --foreground --log-stdout
+smbd -F -S
