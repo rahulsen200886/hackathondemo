@@ -26,6 +26,7 @@ RUN yum -y update
 RUN yum -y install gcsfuse samba samba-common-tools realmd oddjob oddjob-mkhomedir sssd adcli krb5-workstation nscd
 
 VOLUME ["/export"]
+CMD  ["gcsfuse -o rw,allow_other replaceme /export"]
 EXPOSE 139
 EXPOSE 445
 CMD  ["bash","/opt/smbcust/dockerentry.sh"]
