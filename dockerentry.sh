@@ -1,14 +1,6 @@
 echo "Running startup"
+yum -y install gcsfuse samba-common-tools realmd oddjob oddjob-mkhomedir sssd adcli krb5-workstation nscd
 export GOOGLE_APPLICATION_CREDENTIALS=/accounts/key.json
-var_smbuser="mysmbuser"
-var_smbpassword="changemelater"
-var_smbgroup="smbgroup"
-useradd -m $var_smbuser -p $var_smbpassword
-groupadd $var_smbgroup
-usermod -a -G $var_smbgroup $var_smbuser
-mkdir -p /export
-chmod 755 /export
-chown $var_smbuser:$var_smbgroup /export
 echo "Running fuse"
 gcsfuse -o rw,allow_other ${BUCKET} /export
 echo -e "
@@ -18,8 +10,8 @@ echo -e "
  writable = yes
  guest ok = yes 
  browseable = yes 
- force user = $var_smbuser
- force group = $var_smbgroup
+ force user = mysmbuser
+ force group = smbgroup
 " >> /etc/samba/smb.conf
 
 
