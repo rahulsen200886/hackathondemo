@@ -13,13 +13,17 @@ RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == \
     rm -f /lib/systemd/system/anaconda.target.wants/*; 
 CMD ["/usr/sbin/init"]
 ADD gcsfuse.repo /etc/yum.repos.d/gcsfuse.repo
-RUN yum -y install gcsfuse samba-common-tools realmd oddjob oddjob-mkhomedir sssd adcli krb5-workstation nscd
 RUN mkdir -p /export
 RUN mkdir -p /opt/smbcust
+RUN useradd -m mysmbuser -p changemelater
+RUN groupadd smbgroup
+RUN usermod -a -G smbgroup mysmbuser
+RUN mkdir -p /export
+RUN chmod 755 /export
 COPY dockerentry.sh /opt/smbcust/
 RUN chmod +rx /opt/smbcust/dockerentry.sh
 
 VOLUME ["/export"]
 EXPOSE 139
 EXPOSE 445
-ENTRYPOINT ["/opt/smbcust/dockerentry.sh"]
+#ENTRYPOINT ["/opt/smbcust/dockerentry.sh"]
