@@ -13,4 +13,4 @@ echo -e "
  force user = mysmbuser
  force group = smbgroup
 " >> /etc/samba/smb.conf
-smbd -F -S
+smbd -F
