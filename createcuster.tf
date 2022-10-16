@@ -3,6 +3,12 @@ resource "google_service_account" "default" {
   display_name = "Service Account"
 }
 
+resource "google_project_iam_member" "allow_image_pull" {
+  project = "changeme"
+  role   = "roles/artifactregistry.reader"
+  member = "serviceAccount:${var.service_account_email}"
+}
+
 resource "google_container_cluster" "primary" {
   name     = "my-gke-cluster"
   location = "us-central1"
