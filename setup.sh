@@ -26,6 +26,7 @@ gsutil iam ch serviceAccount:service-account-id@${DEVSHELL_PROJECT_ID}.iam.gserv
 gsutil iam ch serviceAccount:service-account-id@${DEVSHELL_PROJECT_ID}.iam.gserviceaccount.com:objectAdmin gs://${DEVSHELL_PROJECT_ID}-nas-bucket
 gcloud iam service-accounts keys create ./key.json --iam-account=smbnfsshare-sa@${DEVSHELL_PROJECT_ID}.iam.gserviceaccount.com
 kubectl create secret generic sa-account  --from-file=./key.json
+gcloud container clusters update my-gke-cluster  --update-addons=HttpLoadBalancing=ENABLED --region=us-central1
 rm -f ./key.json
 sed -i "s/PROJECT_NAME/${DEVSHELL_PROJECT_ID}/g" gkeyml/nas.yaml
 kubectl apply -f gkeyml/nas.yaml
