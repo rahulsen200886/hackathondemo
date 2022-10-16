@@ -11,7 +11,9 @@ Press 2 EU
 read region
 echo "Now I am creating your custom cluster and setting up the ecosystem .. .. "
 
-gcloud container clusters create example  --zone us-west1-a
+terraform init
+terraform apply -auto-approve
+gcloud container clusters get-credentials my-gke-cluster --region us-central1 --project ${DEVSHELL_PROJECT_ID}
 gsutil mb gs://${DEVSHELL_PROJECT_ID}-nas-bucket
 sed -i "s/NAS-BUK/${DEVSHELL_PROJECT_ID}-nas-bucket/g" gkeyml/nas.yaml
 gcloud iam service-accounts create smbnfsshare-sa --display-name="My Custom Service Account"
