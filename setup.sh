@@ -24,7 +24,7 @@ gcloud iam service-accounts keys create ./key.json --iam-account=smbnfsshare-sa@
 kubectl create secret generic sa-account  --from-file=./key.json
 rm -f ./key.json
 sed -i "s/replaceme/${DEVSHELL_PROJECT_ID}-nas-bucket/g" Dockerfile
-sed -i "s/changeme/${DEVSHELL_PROJECT_ID}/g" 
+sed -i "s/changeme/${DEVSHELL_PROJECT_ID}/g" createcuster.tf
 docker build . -t smbshare1
 docker tag smbshare1 gcr.io/${DEVSHELL_PROJECT_ID}/smshare.v0.1
 docker push gcr.io/${DEVSHELL_PROJECT_ID}/smshare.v0.1
