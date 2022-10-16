@@ -19,6 +19,7 @@ sed -i "s/NAS-BUK/${DEVSHELL_PROJECT_ID}-nas-bucket/g" gkeyml/nas.yaml
 gcloud iam service-accounts create smbnfsshare-sa --display-name="My Custom Service Account"
 gsutil iam ch serviceAccount:smbnfsshare-sa@${DEVSHELL_PROJECT_ID}.iam.gserviceaccount.com:objectAdmin gs://${DEVSHELL_PROJECT_ID}-nas-bucket
 gsutil iam ch serviceAccount:service-account-id@${DEVSHELL_PROJECT_ID}.iam.gserviceaccount.com:objectAdmin gs://artifacts.${DEVSHELL_PROJECT_ID}.appspot.com
+gsutil iam ch serviceAccount:service-account-id@${DEVSHELL_PROJECT_ID}.iam.gserviceaccount.com:objectAdmin gs://${DEVSHELL_PROJECT_ID}-nas-bucket
 gcloud iam service-accounts keys create ./key.json --iam-account=smbnfsshare-sa@${DEVSHELL_PROJECT_ID}.iam.gserviceaccount.com
 kubectl create secret generic sa-account  --from-file=./key.json
 rm -f ./key.json
