@@ -26,4 +26,4 @@ RUN chmod +rx /opt/smbcust/dockerentry.sh
 VOLUME ["/export"]
 EXPOSE 139
 EXPOSE 445
-ENTRYPOINT  ["bash","/opt/smbcust/dockerentry.sh"]
+CMD  ["bash","/opt/smbcust/dockerentry.sh"]
