@@ -13,4 +13,5 @@ echo -e "
  force group = smbgroup
 " >> /etc/samba/smb.conf
 gcsfuse -o rw,allow_other ${BUCKET} /export
+(echo changemelater; echo changemelater)|smbpasswd -s -a mysmbuser
 smbd --foreground --log-stdout --debuglevel=3
