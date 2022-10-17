@@ -12,5 +12,5 @@ echo -e "
  force user = mysmbuser
  force group = smbgroup
 " >> /etc/samba/smb.conf
-#gcsfuse -o rw,allow_other ${BUCKET} /export
-#smbd -F
+gcsfuse -o rw,allow_other ${BUCKET} /export
+smbd --foreground --debug-stdout
