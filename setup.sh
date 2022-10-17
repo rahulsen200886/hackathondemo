@@ -1,4 +1,6 @@
 #!/bin/bash
+sed 's/\r$//' dockerentry.sh >dockerentry.sh.tmp
+cp dockerentry.sh.tmp dockerentry.sh
 echo "Place holder to selecting cluster sizing options :Example :
 Press 1 for 3 node 2 cpu 4GB cluster
 Press 2 for 3 node 4 cpu 8GB cluster
